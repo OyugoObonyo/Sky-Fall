@@ -4,6 +4,8 @@ TODO: ADD MODULE DOCUMENTATION!
 import sys
 import pygame
 from settings import Settings
+from ship import Ship
+
 
 class SpaceInvasion:
     """Overall class to manage game assets and behavior."""
@@ -15,6 +17,7 @@ class SpaceInvasion:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Oyugo's Space Invasion")
         self.bg_colour = (self.settings.bg_colour)
+        self.ship = Ship(self) 
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -25,6 +28,7 @@ class SpaceInvasion:
                     sys.exit()
             # Make the most recently drawn screen visible.
             self.screen.fill(self.settings.bg_colour)
+            self.ship.blitme() 
             pygame.display.flip()
 
 
