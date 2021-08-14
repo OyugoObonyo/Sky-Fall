@@ -11,7 +11,7 @@ class Ship:
         """ TODO: Document method"""
         self.screen = space_invasion.screen
         self.screen_rect = space_invasion.screen.get_rect()
-        self.image = pygame.image.load("IMAGES/ship.bmp")
+        self.image = pygame.image.load("E:\Space-Invasion\IMAGES\ship.bmp")
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
 
