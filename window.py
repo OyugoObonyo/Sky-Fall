@@ -17,19 +17,27 @@ class SpaceInvasion:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Oyugo's Space Invasion")
         self.bg_colour = (self.settings.bg_colour)
-        self.ship = Ship(self) 
+        self.ship = Ship(self)
+
+    def check_events(self):
+        """TODO: Add method documentation"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+    def update_screen(self):
+        """TODO: Document method"""
+        self.screen.fill(self.settings.bg_colour)
+        self.ship.blitme()
+        pygame.display.flip()
 
     def run_game(self):
         """Start the main loop for the game."""
         while True:
             # Watch for keyboard and mouse events.
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self.check_events()
             # Make the most recently drawn screen visible.
-            self.screen.fill(self.settings.bg_colour)
-            self.ship.blitme() 
-            pygame.display.flip()
+            self.update_screen()
 
 
 if __name__ == '__main__':
