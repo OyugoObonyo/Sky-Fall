@@ -15,11 +15,14 @@ class Ship:
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
         self.moving_right = False
+        self.moving_left = False
 
     def update_movement(self):
         """TODO: Add documentation"""
         if self.moving_right:
             self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
     def blitme(self):
         """TODO: Document method"""
