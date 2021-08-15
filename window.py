@@ -3,6 +3,7 @@ TODO: ADD MODULE DOCUMENTATION!
 """
 import sys
 import pygame
+from pygame.constants import KEYDOWN
 from settings import Settings
 from ship import Ship
 
@@ -24,6 +25,12 @@ class SpaceInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
 
     def update_screen(self):
         """TODO: Document method"""
@@ -36,6 +43,7 @@ class SpaceInvasion:
         while True:
             # Watch for keyboard and mouse events.
             self.check_events()
+            self.ship.update_movement()
             # Make the most recently drawn screen visible.
             self.update_screen()
 
