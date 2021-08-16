@@ -66,6 +66,11 @@ class SpaceInvasion:
             self.bullets.update()
             # Make the most recently drawn screen visible.
             self.update_screen()
+            # Get rid of bullets that have disappeared.
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+            print(len(self.bullets))
 
 
 if __name__ == '__main__':
