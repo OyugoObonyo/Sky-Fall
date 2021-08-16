@@ -2,10 +2,6 @@
 TODO: Document module
 """
 
-
-from _typeshed import Self
-
-
 class Settings:
     """TODO: Document Class"""
 

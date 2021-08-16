@@ -6,7 +6,7 @@ import pygame
 from pygame.constants import KEYDOWN
 from settings import Settings
 from ship import Ship
-
+from bullet import Bullet
 
 class SpaceInvasion:
     """Overall class to manage game assets and behavior."""
@@ -22,6 +22,7 @@ class SpaceInvasion:
         pygame.display.set_caption("Oyugo's Space Invasion")
         self.bg_colour = (self.settings.bg_colour)
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
 
     def check_events(self):
         """TODO: Add method documentation"""
@@ -35,16 +36,25 @@ class SpaceInvasion:
                     self.ship.moving_left = True
                 elif event.key == pygame.K_q:
                     sys.exit()
+                elif event.key == pygame.K_SPACE:
+                    self._fire_bullet()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     self.ship.moving_right = False
                 elif event.key == pygame.K_LEFT:
                     self.ship.moving_left = False
 
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
     def update_screen(self):
         """TODO: Document method"""
         self.screen.fill(self.settings.bg_colour)
         self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         pygame.display.flip()
 
     def run_game(self):
@@ -53,6 +63,7 @@ class SpaceInvasion:
             # Watch for keyboard and mouse events.
             self.check_events()
             self.ship.update_movement()
+            self.bullets.update()
             # Make the most recently drawn screen visible.
             self.update_screen()
 
