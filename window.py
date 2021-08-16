@@ -15,7 +15,10 @@ class SpaceInvasion:
         pygame.init()
         # Assign surface i.e where game elements can be displayed
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # Enable Full screen mode
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Oyugo's Space Invasion")
         self.bg_colour = (self.settings.bg_colour)
         self.ship = Ship(self)
@@ -30,6 +33,8 @@ class SpaceInvasion:
                     self.ship.moving_right = True
                 elif event.key == pygame.K_LEFT:
                     self.ship.moving_left = True
+                elif event.key == pygame.K_q:
+                    sys.exit()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     self.ship.moving_right = False
