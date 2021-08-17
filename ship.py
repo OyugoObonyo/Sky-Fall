@@ -18,7 +18,7 @@ class Ship(Sprite):
         self.settings = sky_fall.settings
         # Assign ship position on the screen
         self.screen_rect = sky_fall.screen.get_rect()
-        self.image = pygame.image.load("E:\Space-Invasion\IMAGES\humanship.bmp")
+        self.image = pygame.image.load("E:\Sky-Fall\IMAGES\humanship.bmp")
         # Place ship on assigned position
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
