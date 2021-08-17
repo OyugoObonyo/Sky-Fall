@@ -56,12 +56,12 @@ class SkyFall:
  
     def _create_stars(self, stars_number, row_number):
         """Create an stars and place it in the row."""
-        stars = Star(self)
-        stars_width, stars_height = stars.rect.size
-        stars.x = stars_width + 2 * stars_width * stars_number
-        stars.rect.x = stars.x
-        stars.rect.y = stars.rect.height + 2 * stars.rect.height * row_number
-        self.stars.add(stars)
+        star = Star(self)
+        stars_width, stars_height = star.rect.size
+        star.x = stars_width + 2 * stars_width * stars_number
+        star.rect.x = star.x
+        star.rect.y = star.rect.height + 2 * star.rect.height * row_number
+        self.stars.add(star)
 
     def _update_stars(self):
         """Update the positions of all stars in the galaxy."""
@@ -102,9 +102,9 @@ class SkyFall:
 
     def _change_galaxy_direction(self):
         """Drop the entire galaxy and change the galaxy's direction."""
-        for stars in self.stars.sprites():
-            stars.rect.y += self.settings.galaxy_drop_speed
-            self.settings.galaxy_direction *= -1
+        for star in self.stars.sprites():
+            star.rect.y += self.settings.galaxy_drop_speed
+        self.settings.galaxy_direction *= -1
 
 
     def _check_events(self):
@@ -185,7 +185,7 @@ class SkyFall:
             self.sb.prep_level()
 
     def _update_screen(self):
-        """TODO: Document method"""
+        """Manages output on the screen"""
         self.screen.fill(self.settings.bg_colour)
         # Draw ship on the screen
         self.ship.blitme()
