@@ -1,5 +1,5 @@
 """
-TODO: Add class documentation
+Module containing the star class
 """
 import pygame
 from pygame.sprite import Sprite
@@ -12,7 +12,7 @@ class Star(Sprite):
         self.screen = sky_fall.screen
         self.settings = sky_fall.settings
         # Load the star image and set its rect attribute.
-        self.image = pygame.image.load("E:\Space-Invasion\IMAGES\Star.bmp")
+        self.image = pygame.image.load("E:\Sky-Fall\IMAGES\Star.bmp")
         self.rect = self.image.get_rect()
         # Start each new star near the top left of the screen.
         self.rect.x = self.rect.width
