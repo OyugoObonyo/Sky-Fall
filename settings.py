@@ -43,5 +43,4 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.star_speed *= self.speedup_scale
-        self.star_points = int(self.star_points * self.score_scale)
-        print(self.star_points)
+        self.star_points = int(self.star_points * self.score_scale)        
