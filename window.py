@@ -4,6 +4,7 @@ The main program module that handles the game's functionality
 import sys
 from time import sleep
 import pygame
+from pygame import mixer
 from pygame.constants import KEYDOWN
 from settings import Settings
 from stats import GameStats
@@ -35,6 +36,7 @@ class SkyFall:
         self.stars = pygame.sprite.Group()
         self._create_galaxy()
         self.play_button = Button(self, "Play")
+        self.quit_button = Button(self, "Quit")
 
     def _create_galaxy(self):
         """Create the galaxy of stars."""
@@ -120,7 +122,9 @@ class SkyFall:
                     self.ship.moving_left = True
                 elif event.key == pygame.K_q:
                     sys.exit()
-                elif event.key == pygame.K_SPACE or event.key == pygame.K_s:
+                elif event.key == pygame.K_SPACE:
+                    mixer.music.load('E:\Sky-Fall\SOUNDS\shots.ogg')
+                    mixer.music.play()
                     self._fire_bullet()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
