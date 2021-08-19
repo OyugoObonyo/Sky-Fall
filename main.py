@@ -12,9 +12,7 @@ from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from bullet import Bullet
-from specialbullet import SpeBullet as Sb
 from stars import Star
-
 
 class SkyFall:
     """Overall class to manage game assets and behavior."""
@@ -35,7 +33,7 @@ class SkyFall:
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.special_bullet = pygame.sprite.Group()
-        self.special_bullet_shot = False
+        self.bomb_status = False
         self.stars = pygame.sprite.Group()
         self._create_galaxy()
         self.play_button = Button(self, "Play")
@@ -125,12 +123,15 @@ class SkyFall:
                 elif event.key == pygame.K_q:
                     sys.exit()
                 elif event.key == pygame.K_SPACE:
+                    self.bomb_status = False
+                    self.settings.debomb()
+                    self._fire_bullet()
                     mixer.music.load('E:\Sky-Fall\SOUNDS\shots.ogg')
                     mixer.music.play()
-                    self._fire_bullet()
                 elif event.key == pygame.K_b:
-                    self.special_bullet_shot = True
-                    self._fire_special_bullet
+                    self.bomb_status = True
+                    self.settings.bomb()
+                    self._fire_bullet()                    
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     self.ship.moving_right = False
@@ -166,12 +167,6 @@ class SkyFall:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
-    def _fire_special_bullet(self):
-        """TODO: Document methods"""
-        if len(self.special_bullet) < self.settings.sp_bullet_allowed:
-            new_special_bullet = Sb(self)
-            self.special_bullet.add(new_special_bullet)
-
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
         # Update bullet positions.
@@ -184,7 +179,10 @@ class SkyFall:
 
     def _check_collisions(self):
         """Check for any bullets that have hit stars and get rid of the bullet and the stars"""
-        collisions = pygame.sprite.groupcollide(self.bullets, self.stars, True, True)
+        if self.bomb_status ==  False:
+            collisions = pygame.sprite.groupcollide(self.bullets, self.stars, True, True)
+        else:
+            collisions = pygame.sprite.groupcollide(self.bullets, self.stars, False , True)
         if collisions:
             for stars in collisions.values():
                 self.stats.score += self.settings.star_points * len(stars)
@@ -205,9 +203,6 @@ class SkyFall:
         # Draw ship on the screen
         self.ship.blitme()
         # Draw all bullets in the sprites group on the screen
-        if self.special_bullet_shot == True:
-            for special_bullet in self.special_bullet.sprites():
-                special_bullet.draw_special_bullet()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.stars.draw(self.screen)
