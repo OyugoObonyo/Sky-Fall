@@ -17,7 +17,7 @@ class Scoreboard:
         self.settings = sky_fall.settings
         self.stats = sky_fall.stats
         # Font settings for scoring information.
-        self.text_color = (30, 30, 30)
+        self.text_color = (255, 0, 0)
         self.font = pygame.font.SysFont(None, 48)
         # Prepare the initial score image.
         self.prep_score()
