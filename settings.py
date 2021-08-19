@@ -29,6 +29,22 @@ class Settings:
         self.score_scale = 1.5
         self.initialize_dynamic_settings()
 
+    def bomb(self):
+        """TODO: document method"""
+        self.bullet_speed = 1.0
+        self.bullet_width = 5
+        self.bullet_height = 25
+        self.bullet_color = (0, 0, 255)
+        self.bullet_allowed = 1
+
+    def debomb(self):
+        """TODO:Document Method"""
+        self.bullet_speed = 1.5
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (255, 0, 0)
+        self.bullets_allowed = 5
+        
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
         self.ship_speed = 1.5
